@@ -3,9 +3,7 @@ package com.asierg.cqrspoc.conversation.infrastructure.config.bus
 import com.asierg.cqrspoc.shared.domain.bus.command.Command
 import com.asierg.cqrspoc.shared.domain.bus.command.CommandBus
 import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
-import org.springframework.stereotype.Component
 
-@Component
 class SpringCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<*>>) : CommandBus {
 
     val handlers: Map<Class<Command>, CommandHandler<Command>> =

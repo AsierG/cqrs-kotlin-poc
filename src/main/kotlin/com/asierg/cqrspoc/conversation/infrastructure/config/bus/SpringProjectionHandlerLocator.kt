@@ -3,9 +3,7 @@ package com.asierg.cqrspoc.conversation.infrastructure.config.bus
 import com.asierg.cqrspoc.shared.domain.bus.projection.Projection
 import com.asierg.cqrspoc.shared.domain.bus.projection.ProjectionBus
 import com.asierg.cqrspoc.shared.domain.bus.projection.ProjectionHandler
-import org.springframework.stereotype.Component
 
-@Component
 class SpringProjectionHandlerLocator(projectionHandlerImplementations: List<ProjectionHandler<*>>) : ProjectionBus {
 
     private val handlers: Map<Class<*>, ProjectionHandler<Projection>>
