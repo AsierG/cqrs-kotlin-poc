@@ -1,26 +1,20 @@
 package com.asierg.cqrspoc.conversation.infrastructure.config.bus
 
-import com.asierg.cqrspoc.shared.application.querybus.Query
-import com.asierg.cqrspoc.shared.application.querybus.QueryBus
-import com.asierg.cqrspoc.shared.application.querybus.QueryHandler
+import com.asierg.cqrspoc.shared.domain.bus.query.Query
+import com.asierg.cqrspoc.shared.domain.bus.query.QueryBus
+import com.asierg.cqrspoc.shared.domain.bus.query.QueryHandler
 import org.springframework.stereotype.Component
 import java.lang.reflect.ParameterizedType
 
 @Component
 class SpringQueryHandlerLocator(queryHandlerImplementations: List<QueryHandler<*, *>>) : QueryBus {
-    private val handlers: MutableMap<Class<*>?, QueryHandler<*, Query<*>>>
 
-    init {
-        handlers = HashMap()
-        queryHandlerImplementations.forEach { queryHandler ->
-            val queryClass = getQueryClass(queryHandler)
-            handlers[queryClass] = queryHandler as QueryHandler<*, Query<*>>
-        }
-    }
+    private val handlers: Map<Class<*>?, QueryHandler<*, Query<*>>> =
+        queryHandlerImplementations.filterIsInstance<QueryHandler<*, Query<*>>>().associateBy { getQueryClass(it) }
 
     override fun <T> ask(query: Query<T>): T {
         if (!handlers.containsKey(query.javaClass)) {
-            throw Exception(String.format("No handler for %s", query.javaClass.name))
+            throw QueryHandlerException(query.javaClass.name)
         }
         return handlers[query.javaClass]!!.handle(query) as T
     }

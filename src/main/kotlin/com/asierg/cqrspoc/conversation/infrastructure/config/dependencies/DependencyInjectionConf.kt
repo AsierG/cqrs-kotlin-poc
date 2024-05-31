@@ -4,7 +4,7 @@ import com.asierg.cqrspoc.conversation.application.create.CreateConversationHand
 import com.asierg.cqrspoc.conversation.application.find.GetConversationQueryHandler
 import com.asierg.cqrspoc.conversation.application.reply.ReplyConversationCommandHandler
 import com.asierg.cqrspoc.conversation.domain.repository.ConversationRepository
-import com.asierg.cqrspoc.shared.application.eventbus.EventBus
+import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

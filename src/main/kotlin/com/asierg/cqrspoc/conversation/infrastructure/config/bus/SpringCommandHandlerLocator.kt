@@ -1,34 +1,31 @@
 package com.asierg.cqrspoc.conversation.infrastructure.config.bus
 
-import com.asierg.cqrspoc.shared.application.commandbus.Command
-import com.asierg.cqrspoc.shared.application.commandbus.CommandBus
-import com.asierg.cqrspoc.shared.application.commandbus.CommandHandler
+import com.asierg.cqrspoc.shared.domain.bus.command.Command
+import com.asierg.cqrspoc.shared.domain.bus.command.CommandBus
+import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
 import org.springframework.stereotype.Component
-import java.lang.reflect.ParameterizedType
 
 @Component
 class SpringCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<*>>) : CommandBus {
 
-    private val handlers: Map<Class<*>, CommandHandler<Command>>
-
-    init {
-        handlers = HashMap()
-        commandHandlerImplementations.forEach { commandHandler ->
-            val commandClass = getCommandClass(commandHandler)
-            handlers[commandClass!!] = commandHandler as CommandHandler<Command>
+    val handlers: Map<Class<Command>, CommandHandler<Command>> =
+        commandHandlerImplementations.associate { commandHandler ->
+            val commandClass = extractCommandClass(commandHandler)
+            commandClass to commandHandler as CommandHandler<Command>
         }
-    }
 
     override fun dispatch(command: Command) {
         if (!handlers.containsKey(command.javaClass)) {
-            throw Exception(String.format("No handler for %s", command.javaClass))
+            throw CommandHandlerException(command.javaClass.name)
         }
         handlers[command.javaClass]!!.handle(command)
     }
 
-    private fun getCommandClass(handler: CommandHandler<*>): Class<*>? {
-        val commandInterface =
-            (handler.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0]
-        return Class.forName(commandInterface.typeName)
+    private fun extractCommandClass(handler: CommandHandler<*>): Class<Command> {
+        return BusReflectionUtils.resolveGenericTypeResolverClass<Command>(
+            handler,
+            CommandHandler::class.java,
+            0,
+        ) as Class<Command>
     }
 }

@@ -1,4 +1,4 @@
-package com.asierg.cqrspoc.shared.application.eventbus
+package com.asierg.cqrspoc.shared.domain.bus.event
 
 import com.asierg.cqrspoc.shared.domain.model.AggregateRoot
 import com.asierg.cqrspoc.shared.domain.model.DomainEvent

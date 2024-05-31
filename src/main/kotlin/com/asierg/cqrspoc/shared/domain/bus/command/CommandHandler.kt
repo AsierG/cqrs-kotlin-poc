@@ -1,4 +1,4 @@
-package com.asierg.cqrspoc.shared.application.commandbus
+package com.asierg.cqrspoc.shared.domain.bus.command
 
 interface CommandHandler<T : Command> {
 

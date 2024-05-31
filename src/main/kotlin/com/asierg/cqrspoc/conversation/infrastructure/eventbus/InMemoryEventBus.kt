@@ -1,7 +1,7 @@
 package com.asierg.cqrspoc.conversation.infrastructure.eventbus
 
-import com.asierg.cqrspoc.shared.application.eventbus.EventBus
 import com.asierg.cqrspoc.shared.domain.DomainMessageJsonSerializer
+import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
 import com.asierg.cqrspoc.shared.domain.model.DomainEvent
 import mu.KLogging
 import org.springframework.stereotype.Component

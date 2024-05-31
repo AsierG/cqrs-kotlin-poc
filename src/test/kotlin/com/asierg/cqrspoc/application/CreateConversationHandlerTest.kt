@@ -5,7 +5,7 @@ import com.asierg.cqrspoc.conversation.application.create.CreateConversationHand
 import com.asierg.cqrspoc.conversation.domain.events.ConversationCreated
 import com.asierg.cqrspoc.conversation.domain.model.Conversation
 import com.asierg.cqrspoc.conversation.domain.repository.ConversationRepository
-import com.asierg.cqrspoc.shared.application.eventbus.EventBus
+import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
 import com.asierg.cqrspoc.shared.domain.model.DomainEvent
 import net.datafaker.Faker
 import org.junit.jupiter.api.Assertions

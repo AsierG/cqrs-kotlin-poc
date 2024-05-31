@@ -4,8 +4,8 @@ import com.asierg.cqrspoc.conversation.domain.model.Conversation
 import com.asierg.cqrspoc.conversation.domain.model.ConversationId
 import com.asierg.cqrspoc.conversation.domain.model.MessageText
 import com.asierg.cqrspoc.conversation.domain.repository.ConversationRepository
-import com.asierg.cqrspoc.shared.application.commandbus.CommandHandler
-import com.asierg.cqrspoc.shared.application.eventbus.EventBus
+import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
+import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
 
 class CreateConversationHandler(
     private val conversationRepository: ConversationRepository,

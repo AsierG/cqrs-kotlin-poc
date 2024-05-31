@@ -1,4 +1,4 @@
-package com.asierg.cqrspoc.shared.application.querybus
+package com.asierg.cqrspoc.shared.domain.bus.query
 
 interface QueryHandler<T, U : Query<T>> {
 

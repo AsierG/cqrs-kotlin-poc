@@ -2,8 +2,8 @@ package com.asierg.cqrspoc.conversation.application.reply
 
 import com.asierg.cqrspoc.conversation.domain.model.*
 import com.asierg.cqrspoc.conversation.domain.repository.ConversationRepository
-import com.asierg.cqrspoc.shared.application.commandbus.CommandHandler
-import com.asierg.cqrspoc.shared.application.eventbus.EventBus
+import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
+import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
 import java.time.Instant
 import java.util.*
 
