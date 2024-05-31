@@ -4,7 +4,7 @@ import com.asierg.cqrspoc.shared.domain.bus.command.Command
 import com.asierg.cqrspoc.shared.domain.bus.command.CommandBus
 import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
 
-class SpringCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<*>>) : CommandBus {
+class SpringCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<out Command>>) : CommandBus {
 
     val handlers: Map<Class<Command>, CommandHandler<Command>> =
         commandHandlerImplementations.associate { commandHandler ->

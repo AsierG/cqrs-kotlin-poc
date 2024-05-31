@@ -7,8 +7,10 @@ import com.asierg.cqrspoc.conversation.domain.repository.ConversationRepository
 import com.asierg.cqrspoc.conversation.infrastructure.config.bus.SpringCommandHandlerLocator
 import com.asierg.cqrspoc.conversation.infrastructure.config.bus.SpringProjectionHandlerLocator
 import com.asierg.cqrspoc.conversation.infrastructure.config.bus.SpringQueryHandlerLocator
+import com.asierg.cqrspoc.shared.domain.bus.command.Command
 import com.asierg.cqrspoc.shared.domain.bus.command.CommandHandler
 import com.asierg.cqrspoc.shared.domain.bus.event.EventBus
+import com.asierg.cqrspoc.shared.domain.bus.projection.Projection
 import com.asierg.cqrspoc.shared.domain.bus.projection.ProjectionHandler
 import com.asierg.cqrspoc.shared.domain.bus.query.QueryHandler
 import org.springframework.context.annotation.Bean
@@ -44,7 +46,7 @@ class DependencyInjectionConf {
         GetConversationQueryHandler(conversationRepository = conversationRepository)
 
     @Bean
-    fun springCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<*>>) =
+    fun springCommandHandlerLocator(commandHandlerImplementations: List<CommandHandler<out Command>>) =
         SpringCommandHandlerLocator(commandHandlerImplementations = commandHandlerImplementations)
 
     @Bean
@@ -52,7 +54,7 @@ class DependencyInjectionConf {
         SpringQueryHandlerLocator(queryHandlerImplementations = queryHandlerImplementations)
 
     @Bean
-    fun getProjectionHandlerLocator(projectionHandlerImplementations: List<ProjectionHandler<*>>) =
+    fun getProjectionHandlerLocator(projectionHandlerImplementations: List<ProjectionHandler<out Projection>>) =
         SpringProjectionHandlerLocator(projectionHandlerImplementations = projectionHandlerImplementations)
 
 

@@ -4,7 +4,7 @@ import com.asierg.cqrspoc.shared.domain.bus.projection.Projection
 import com.asierg.cqrspoc.shared.domain.bus.projection.ProjectionBus
 import com.asierg.cqrspoc.shared.domain.bus.projection.ProjectionHandler
 
-class SpringProjectionHandlerLocator(projectionHandlerImplementations: List<ProjectionHandler<*>>) : ProjectionBus {
+class SpringProjectionHandlerLocator(projectionHandlerImplementations: List<ProjectionHandler<out Projection>>) : ProjectionBus {
 
     private val handlers: Map<Class<*>, ProjectionHandler<Projection>>
 
